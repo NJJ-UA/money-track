@@ -16,11 +16,11 @@ public class ItemTest extends TestCase {
 		//test addCategory() and getCategory()
 		String category="YuLe";
 		item.addCategory(category);
-		assertTrue("Category is not equal",category==item.getCategory());
+		assertTrue("Category is not equal",category.equals(item.getCategory()));
 		//test addDescription() and getDescription()
 		String description ="This KTV is good";
 		item.addDescription(description);
-		assertTrue("description is not equal",description==item.getDescription());
+		assertTrue("description is not equal",description.equals(item.getDescription()));
 		//test addAmount() and getAmount()
 		int amount=40;
 		item.addAmount(amount);
@@ -28,7 +28,7 @@ public class ItemTest extends TestCase {
 		//test addCurrency() and getCurrency()
 		String currency="CAD";
 		item.addCurrency(currency);
-		assertTrue("currency is not equal",currency==item.getCurrency());
+		assertTrue("currency is not equal",currency.equals(item.getCurrency()));
 	}
 	
 	
