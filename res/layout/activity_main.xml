@@ -8,4 +8,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
+    <Button
+        android:id="@+id/addClaimButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="addNewClaim"
+        android:text="Add a new Claim" />
+
+    <ListView
+        android:id="@+id/claimListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addClaimButton"
+        android:layout_alignLeft="@+id/addClaimButton"
+        android:layout_alignParentTop="true" >
+
+    </ListView>
+
 </RelativeLayout>

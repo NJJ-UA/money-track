@@ -17,9 +17,15 @@
 */
 package ca.ualberta.cs.moneytrack;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
@@ -27,6 +33,15 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ListView listView = (ListView) findViewById(R.id.claimListView);
+		ArrayList<Claim> list =ClaimListController.getClaimList().getClaimList();
+		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
+		listView.setAdapter(adapter);		
+		ClaimListController.getClaimList().addListener(new Listener(){
+			public void update(){
+				adapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 	@Override
@@ -34,6 +49,12 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	
+	public void addNewClaim(View v){
+		Intent intent =new Intent(MainActivity.this,AddClaimAcitivity.class);
+		startActivity(intent);
 	}
 
 }
