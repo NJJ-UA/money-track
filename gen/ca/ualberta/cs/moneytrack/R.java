@@ -24,7 +24,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080009;
+        public static final int action_settings=0x7f08000a;
         public static final int addClaimButton=0x7f080000;
         public static final int claimListView=0x7f080001;
         public static final int createClaimBeginEditText=0x7f080008;
@@ -34,20 +34,24 @@ public final class R {
         public static final int createClaimEndTextView=0x7f080005;
         public static final int createClaimNameEditText=0x7f080006;
         public static final int createClaimNameTextView=0x7f080003;
+        public static final int deleteClaimButton=0x7f080009;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int add_claim_acitivity=0x7f030001;
+        public static final int item_list_activity=0x7f030002;
     }
     public static final class menu {
         public static final int add_claim_acitivity=0x7f070000;
-        public static final int main=0x7f070001;
+        public static final int item_list_acitivity=0x7f070001;
+        public static final int main=0x7f070002;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
         public static final int title_activity_add_claim_acitivity=0x7f050003;
+        public static final int title_activity_item_list_acitivity=0x7f050004;
     }
     public static final class style {
         /** 

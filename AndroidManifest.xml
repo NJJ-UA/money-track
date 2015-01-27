@@ -26,6 +26,10 @@
             android:name="ca.ualberta.cs.moneytrack.AddClaimAcitivity"
             android:label="@string/title_activity_add_claim_acitivity" >
         </activity>
+        <activity
+            android:name="ca.ualberta.cs.moneytrack.ItemListAcitivity"
+            android:label="@string/title_activity_item_list_acitivity" >
+        </activity>
     </application>
 
 </manifest>

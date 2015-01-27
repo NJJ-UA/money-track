@@ -24,6 +24,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -34,12 +36,23 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		ListView listView = (ListView) findViewById(R.id.claimListView);
-		ArrayList<Claim> list =ClaimListController.getClaimList().getClaimList();
+		final ArrayList<Claim> list =ClaimListController.getClaimList().getClaimList();
 		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);		
 		ClaimListController.getClaimList().addListener(new Listener(){
 			public void update(){
 				adapter.notifyDataSetChanged();
+			}
+		});
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position,
+					long id) {
+				// TODO Auto-generated method stub 
+				ClaimListController.getClaimList().changeCurrentClaim(list.get(position));
+				Intent intent =new Intent(MainActivity.this,ItemListAcitivity.class);
+				startActivity(intent);
 			}
 		});
 	}

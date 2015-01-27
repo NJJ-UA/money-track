@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ClaimList {
 	public ArrayList<Claim> claimList;
 	public Listener listener;
+	public Claim currentClaim;
 	
 	public ClaimList(){
 		claimList=new ArrayList<Claim>();	
@@ -20,6 +21,9 @@ public class ClaimList {
 	public void deleteClaim(Claim claim) {
 		// TODO Auto-generated method stub
 		claimList.remove(claim);
+		if (listener!=null){
+			listener.update();
+		}
 	}
 	
 	public ArrayList<Claim> getClaimList(){
@@ -28,6 +32,14 @@ public class ClaimList {
 	
 	public void addListener(Listener l){		
 		listener=l;
+	}
+	
+	public void changeCurrentClaim(Claim claim){
+		currentClaim=claim;
+	}
+	
+	public Claim getCurrentClaim(){
+		return currentClaim;
 	}
 	
 }
