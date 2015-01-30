@@ -1,8 +1,14 @@
 package ca.ualberta.cs.moneytrack;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable{
+	/**
+	 * general serialUID for serial
+	 */
+	private static final long serialVersionUID = 1988849207220243065L;
 	protected String itemName;
-	protected	int itemDate;
+	protected String itemDate;
 	protected String category;
 	protected String description;
 	protected int amount;
@@ -19,12 +25,13 @@ public class Item {
 		return this.itemName;
 	}
 
-	public void addItemDate(int itemDate) {
+	public void addItemDate(String itemDate) {
 		// TODO Auto-generated method stub
 		this.itemDate=itemDate;
+		
 	}
 
-	public int getItemDate() {
+	public String getItemDate() {
 		// TODO Auto-generated method stub
 		return this.itemDate;
 	}
@@ -68,6 +75,15 @@ public class Item {
 	public String getCurrency() {
 		// TODO Auto-generated method stub
 		return this.currency;
+	}
+	
+	public String toString(){
+		return this.itemName;		
+	}
+
+	public void changeName(String name) {
+		// TODO Auto-generated method stub
+		itemName=name;
 	}
 
 }

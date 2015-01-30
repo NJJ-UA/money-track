@@ -17,6 +17,7 @@
 */
 package ca.ualberta.cs.moneytrack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.os.Bundle;
@@ -26,8 +27,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -35,13 +39,23 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ClaimListManager.initClaimListManager(this.getApplicationContext());
 		ListView listView = (ListView) findViewById(R.id.claimListView);
 		final ArrayList<Claim> list =ClaimListController.getClaimList().getClaimList();
 		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
+		
 		listView.setAdapter(adapter);		
 		ClaimListController.getClaimList().addListener(new Listener(){
 			public void update(){
 				adapter.notifyDataSetChanged();
+				Toast.makeText(MainActivity.this, "updated", Toast.LENGTH_SHORT).show();
+				try {
+					ClaimListManager.save();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					throw new RuntimeException("save failed");
+				}
 			}
 		});
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -50,11 +64,26 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
 				// TODO Auto-generated method stub 
-				ClaimListController.getClaimList().changeCurrentClaim(list.get(position));
+				ClaimListController.setCurrentClaim(list.get(position));
 				Intent intent =new Intent(MainActivity.this,ItemListAcitivity.class);
 				startActivity(intent);
 			}
 		});
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				ClaimListController.setCurrentClaim(list.get(position));
+				Intent intent =new Intent(MainActivity.this,EditClaimActivity.class);
+				startActivity(intent);
+				return false;
+			}
+			
+		
+		});
+			
 	}
 
 	@Override

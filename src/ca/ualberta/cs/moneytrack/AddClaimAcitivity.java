@@ -1,5 +1,7 @@
 package ca.ualberta.cs.moneytrack;
 
+import java.util.Date;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -22,10 +24,11 @@ public class AddClaimAcitivity extends Activity {
 		return true;
 	}
 	
-	public void finishAddClaim(View v){
-		ClaimListController clc=new ClaimListController();
-		EditText nameView= (EditText) findViewById(R.id.createClaimNameEditText);		
-		clc.addClaim(nameView.getText().toString());
+	public void finishAddClaim(View v){	
+		EditText nameView= (EditText) findViewById(R.id.createClaimNameEditText);
+		EditText beginView=(EditText) findViewById(R.id.createClaimBeginEditText);
+		EditText endView=(EditText) findViewById(R.id.createClaimEndEditText);		
+		ClaimListController.addClaim(nameView.getText().toString(),beginView.getText().toString(),endView.getText().toString());
 		finish();
 	}
 

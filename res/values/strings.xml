@@ -3,8 +3,11 @@
 
     <string name="app_name">MoneyTrack</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_add_claim_acitivity">Add a new Claim</string>
     <string name="title_activity_item_list_acitivity">Item List</string>
+    <string name="title_activity_add_item_acitivity">Add a new Item</string>
+    <string name="title_activity_item">Item detail</string>
+    <string name="title_activity_edit_claim">Edit this Claim</string>
+    <string name="title_activity_edit_item">Edit this Item</string>
 
 </resources>

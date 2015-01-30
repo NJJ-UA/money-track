@@ -18,4 +18,25 @@
         android:onClick="deleteClaim"
         android:text="Delete this Claim" />
 
+    <Button
+        android:id="@+id/addItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/deleteClaimButton"
+        android:layout_alignLeft="@+id/deleteClaimButton"
+        android:layout_alignRight="@+id/deleteClaimButton"
+        android:onClick="addItem"
+        android:text="Add a new Item" />
+
+    <ListView
+        android:id="@+id/itemListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addItemButton"
+        android:layout_alignLeft="@+id/addItemButton"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp" >
+
+    </ListView>
+
 </RelativeLayout>
