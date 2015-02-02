@@ -20,7 +20,12 @@ public class AddItemAcitivity extends Activity {
 	 * Do almost everything through the ClaimListController
 	 * Some explain comment are written before function.
 	 * 
+	 * Citation:
 	 * 
+	 * http://developer.android.com/guide/topics/ui/controls/spinner.html
+	 * Android Open Source Project 
+	 * licensed under the Apache 2.0 license
+	 * 2015/01/30
 	 * 
 	 * (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -30,6 +35,11 @@ public class AddItemAcitivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_item_acitivity);
+		/*http://developer.android.com/guide/topics/ui/controls/spinner.html
+		 * Android Open Source Project 
+		 * licensed under the Apache 2.0 license
+		 * 2015/01/30				
+		 */
 		Spinner sp=(Spinner) findViewById(R.id.createCurrencySpinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.currency, 
 				android.R.layout.simple_spinner_item);

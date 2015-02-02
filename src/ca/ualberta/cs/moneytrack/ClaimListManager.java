@@ -18,6 +18,15 @@ public class ClaimListManager {
 	 * This class is static so we can use save function everywhere
 	 * It will be initialize when open the App(see in MainActivity onCreat() function)
 	 * Some explain comment are written before function.
+	 * 
+	 * 
+	 * Citation:
+	 * 
+	 * https://www.youtube.com/playlist?list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O
+	 * Author: Abram Hindle
+	 * 2015/01/28
+	 * 
+	 * 
 	 */
 	
 	static Context context;

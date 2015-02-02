@@ -47,6 +47,24 @@ public class MainActivity extends Activity {
 	 * As mainActivity, has response to initial the two static class
 	 * ClaimlistController and ClaimListManager when open the app
 	 * 
+	 * Citation:
+	 * 
+	 * 
+	 * https://www.youtube.com/playlist?list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O
+	 * Author: Abram Hindle
+	 * 2015/01/28
+	 * 
+	 * http://developer.android.com/guide/topics/ui/dialogs.html 
+	 * Android Open Source Project 
+	 * licensed under the Apache 2.0 license
+	 * 2015/01/31	
+	 * 
+	 * 	 
+	 *https://stackoverflow.com/questions/8284706/send-email-via-gmail 
+	 * Author: Igor Popov
+	 * Editor: xbakesx
+	 * 2015/01/31
+	 * 
 	 */
 	
 	@Override
@@ -84,7 +102,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
-				// TODO Auto-generated method stub 
 				ClaimListController.setCurrentClaim(list.get(position));
 				Intent intent =new Intent(MainActivity.this,ItemListAcitivity.class);
 				startActivity(intent);
@@ -101,7 +118,11 @@ public class MainActivity extends Activity {
 				// The case status of claim is in progress or return and you have three options
 				if (list.get(position).getStatus().equals("In progress")||
 						list.get(position).getStatus().equals("Returned")){
-					//http://developer.android.com/guide/topics/ui/dialogs.html 2015/01/31				
+					/*http://developer.android.com/guide/topics/ui/dialogs.html 
+					 * Android Open Source Project 
+					 * licensed under the Apache 2.0 license
+					 * 2015/01/31				
+					 */
 					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 					builder.setTitle(R.string.pick_action);
 					builder.setItems(R.array.action_array, new DialogInterface.OnClickListener() {
@@ -119,7 +140,11 @@ public class MainActivity extends Activity {
 								ClaimListController.getClaimList().changeStatus("Submitted");							
 							}else if (which==2){
 								//option3: email this claim
-								//https://stackoverflow.com/questions/8284706/send-email-via-gmail 2015/01/31
+								/*https://stackoverflow.com/questions/8284706/send-email-via-gmail 
+								 * Author: Igor Popov
+								 * Editor: xbakesx
+								 * 2015/01/31
+								 */
 								ClaimListController.setCurrentClaim(list.get(position));
 								Intent send = new Intent(Intent.ACTION_SENDTO);
 								String uriText = "mailto:" + Uri.encode("") + 
@@ -154,7 +179,11 @@ public class MainActivity extends Activity {
 														
 							}else if (which==2){
 								//option 3: email this claim
-								//https://stackoverflow.com/questions/8284706/send-email-via-gmail 2015/01/31
+								/*https://stackoverflow.com/questions/8284706/send-email-via-gmail 
+								 * Author: Igor Popov
+								 * Editor: xbakesx
+								 * 2015/01/31
+								 */
 								ClaimListController.setCurrentClaim(list.get(position));
 								Intent send = new Intent(Intent.ACTION_SENDTO);
 								String uriText = "mailto:" + Uri.encode("") + 
@@ -170,7 +199,11 @@ public class MainActivity extends Activity {
 					builder.show();
 					// The case status of claim is approved,no other choice but just email these claim
 				} else if (list.get(position).getStatus().equals("Approved")){
-					//https://stackoverflow.com/questions/8284706/send-email-via-gmail 2015/01/31
+					/*https://stackoverflow.com/questions/8284706/send-email-via-gmail 
+					 * Author: Igor Popov
+					 * Editor: xbakesx
+					 * 2015/01/31
+					 */
 					ClaimListController.setCurrentClaim(list.get(position));
 					Intent send = new Intent(Intent.ACTION_SENDTO);
 					String uriText = "mailto:" + Uri.encode("") + 

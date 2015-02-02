@@ -25,7 +25,12 @@ public class EditItemActivity extends Activity {
 	 * Do almost everything through the ClaimListController
 	 * Some explain comment are written before function.
 	 * 
+	 * Citation:
 	 * 
+	 * http://developer.android.com/guide/topics/ui/controls/spinner.html
+	 * Android Open Source Project 
+	 * licensed under the Apache 2.0 license
+	 * 2015/01/30
 	 * 
 	 */
 
@@ -38,6 +43,11 @@ public class EditItemActivity extends Activity {
 		EditText categoryView=(EditText) findViewById(R.id.editItemCategoryEditText);
 		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
 		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
+		/*http://developer.android.com/guide/topics/ui/controls/spinner.html
+		 * Android Open Source Project 
+		 * licensed under the Apache 2.0 license
+		 * 2015/01/30				
+		 */
 		Spinner sp=(Spinner) findViewById(R.id.editCurrencySpinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.currency, 
 				android.R.layout.simple_spinner_item);
