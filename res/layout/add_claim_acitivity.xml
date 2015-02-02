@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AddClaimAcitivity" >
+    tools:context=".AddClaimAcitivity"
+    tools:ignore="HardcodedText,TextFields" >
 
     <Button
         android:id="@+id/createClaimButton"
@@ -16,7 +17,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:onClick="finishAddClaim"
-        android:text="Create this new Claim" />
+        android:text="Create this new Claim"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/createClaimNameTextView"
@@ -25,28 +27,6 @@
         android:layout_alignLeft="@+id/createClaimButton"
         android:text="Claim Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/createClaimEndEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/createClaimButton"
-        android:layout_alignLeft="@+id/createClaimEndTextView"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:inputType="date" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/createClaimNameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createClaimNameTextView"
-        android:layout_below="@+id/createClaimNameTextView"
-        android:layout_marginTop="19dp"
-        android:ems="10" />
 
     <TextView
         android:id="@+id/createClaimBeginTextView"
@@ -58,24 +38,59 @@
         android:text="From"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/createClaimEndTextView"
+    <EditText
+        android:id="@+id/createClaimNameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createClaimBeginTextView"
-        android:layout_below="@+id/createClaimBeginEditText"
-        android:layout_marginTop="58dp"
-        android:text="To"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignLeft="@+id/createClaimNameTextView"
+        android:layout_below="@+id/createClaimNameTextView"
+        android:ems="10" />
 
     <EditText
         android:id="@+id/createClaimBeginEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createClaimEndTextView"
+        android:layout_alignLeft="@+id/createClaimBeginTextView"
         android:layout_below="@+id/createClaimBeginTextView"
-        android:layout_marginTop="38dp"
         android:ems="10"
         android:inputType="date" />
+
+    <TextView
+        android:id="@+id/createClaimEndTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createClaimBeginEditText"
+        android:layout_below="@+id/createClaimBeginEditText"
+        android:text="To"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/createClaimEndEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createClaimEndTextView"
+        android:layout_below="@+id/createClaimEndTextView"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/createClaimDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createClaimEndEditText"
+        android:layout_below="@+id/createClaimEndEditText"
+        android:text="Description"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/createClaimDescriptionEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createClaimDescriptionTextView"
+        android:layout_below="@+id/createClaimDescriptionTextView"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

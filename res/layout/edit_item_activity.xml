@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".EditItemActivity" >
+    tools:context=".EditItemActivity"
+    tools:ignore="TextFields,HardcodedText" >
 
     <TextView
         android:id="@+id/editItemNameTextView"
@@ -104,14 +105,6 @@
         android:text="Unit of Currency"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editItemCurrencyEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editItemCurrencyTextView"
-        android:ems="10" />
-
     <Button
         android:id="@+id/finishEditItemButton"
         android:layout_width="wrap_content"
@@ -121,5 +114,14 @@
         android:layout_alignParentRight="true"
         android:onClick="finishEdit"
         android:text="Edit this Item" />
+
+    <Spinner
+        android:id="@+id/editCurrencySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/finishEditItemButton"
+        android:layout_alignLeft="@+id/editItemCurrencyTextView"
+        android:layout_alignRight="@+id/editItemAmountEditText"
+        android:layout_below="@+id/editItemCurrencyTextView" />
 
 </RelativeLayout>

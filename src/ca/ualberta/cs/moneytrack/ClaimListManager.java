@@ -13,6 +13,13 @@ import android.content.SharedPreferences.Editor;
 import android.util.Base64;
 
 public class ClaimListManager {
+	/*
+	 * This class is used to load/ save data in disk
+	 * This class is static so we can use save function everywhere
+	 * It will be initialize when open the App(see in MainActivity onCreat() function)
+	 * Some explain comment are written before function.
+	 */
+	
 	static Context context;
 	static final String fileName="MTData";
 	static final String prefName="mtdata";
@@ -20,8 +27,7 @@ public class ClaimListManager {
 	
 
 	public ClaimListManager(Context context) {
-		// TODO Auto-generated constructor stub
-		this.context=context;
+		ClaimListManager.context=context;
 	}
 	
 	public static void initClaimListManager(Context context){
@@ -29,6 +35,7 @@ public class ClaimListManager {
 			clm=new ClaimListManager(context);
 		}		
 	}
+	
 	public static ClaimListManager getClaimListManager(){
 		if (clm==null){
 			throw new RuntimeException("CliamListManager not initialized");
@@ -48,8 +55,8 @@ public class ClaimListManager {
 	public static ClaimList load() throws OptionalDataException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		SharedPreferences setting=context.getSharedPreferences(fileName, 0);
-//		return setting.getString(prefName, "123");
 		String s=setting.getString(prefName, "");
+		// if there is no data saved before,just return a new claimlist
 		if (s.equals("")){
 			return new ClaimList();
 		}else{

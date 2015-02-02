@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MoneyTrack</string>
+    <string name="app_name">jni1-MT</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_claim_acitivity">Add a new Claim</string>
     <string name="title_activity_item_list_acitivity">Item List</string>
@@ -9,5 +9,25 @@
     <string name="title_activity_item">Item detail</string>
     <string name="title_activity_edit_claim">Edit this Claim</string>
     <string name="title_activity_edit_item">Edit this Item</string>
-
+    <string name="pick_action">Choose what you want to do</string>
+ 
+    <string-array name="currency">
+        <item>CAD</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+    </string-array>
+    
+    <string-array name="action_array">
+        <item>Edit this claim</item>
+        <item>Denote this claim as submitted</item>
+        <item>Email this Claim</item>
+    </string-array>
+    
+    <string-array name="action_array_sub">
+        <item>Denote this claim as returned</item>
+        <item>Denote this claim as approved</item>
+        <item>Email this Claim</item>
+    </string-array>    
+    
 </resources>

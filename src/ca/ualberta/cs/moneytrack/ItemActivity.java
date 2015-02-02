@@ -6,8 +6,23 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ItemActivity extends Activity {
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * 
+	 * 
+	 * function is same as the name, show the detail information of a item
+	 * 
+	 * 
+	 *  This is a activity class so nothing special :)
+	 * Do almost everything through the ClaimListController
+	 * Some explain comment are written before function.
+	 * 
+	 * 
+	 */
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +55,12 @@ public class ItemActivity extends Activity {
 	}
 	
 	public void deleteItem(View view){
-		ClaimListController.deleteItem();
+		try {
+			ClaimListController.deleteItem();
+		} catch (StatusException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(this, "Submitted or Approved status not allowed edit or delete!", Toast.LENGTH_LONG).show();
+		}
 		finish();
 	}
 	

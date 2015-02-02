@@ -19,9 +19,13 @@ package ca.ualberta.cs.moneytrack;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -30,25 +34,39 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
-
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * 
+	 * This is a activity class so nothing special :)
+	 * Do almost everything through the ClaimListController
+	 * Some explain comment are written before function.
+	 * 
+	 * As mainActivity, has response to initial the two static class
+	 * ClaimlistController and ClaimListManager when open the app
+	 * 
+	 */
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//try to initialize  ClaimListManager
 		ClaimListManager.initClaimListManager(this.getApplicationContext());
+		//set list view of claimlist
 		ListView listView = (ListView) findViewById(R.id.claimListView);
 		final ArrayList<Claim> list =ClaimListController.getClaimList().getClaimList();
 		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
+		adapter.sort(sortClaim());
+		listView.setAdapter(adapter);
 		
-		listView.setAdapter(adapter);		
+		//every time call update in listner will sort the adapter first then notifychanged then save data to disk
 		ClaimListController.getClaimList().addListener(new Listener(){
 			public void update(){
-				adapter.notifyDataSetChanged();
-				Toast.makeText(MainActivity.this, "updated", Toast.LENGTH_SHORT).show();
+				adapter.sort(sortClaim());			
+				adapter.notifyDataSetChanged();	
 				try {
 					ClaimListManager.save();
 				} catch (IOException e) {
@@ -58,6 +76,9 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+		
+
+		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -69,21 +90,99 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		//when longclick on a claim, action may depend on the status of the claim
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				ClaimListController.setCurrentClaim(list.get(position));
-				Intent intent =new Intent(MainActivity.this,EditClaimActivity.class);
-				startActivity(intent);
+					final int position, long id) {
+	
+				// The case status of claim is in progress or return and you have three options
+				if (list.get(position).getStatus().equals("In progress")||
+						list.get(position).getStatus().equals("Returned")){
+					//http://developer.android.com/guide/topics/ui/dialogs.html 2015/01/31				
+					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+					builder.setTitle(R.string.pick_action);
+					builder.setItems(R.array.action_array, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+					    // The 'which' argument contains the index position
+					    // of the selected item
+							if (which==0){
+								//option 1: edit this claim
+								ClaimListController.setCurrentClaim(list.get(position));
+								Intent intent =new Intent(MainActivity.this,EditClaimActivity.class);
+								startActivity(intent);							
+							}else if (which==1){
+								//option2: change the status to subbmitted
+								ClaimListController.setCurrentClaim(list.get(position));
+								ClaimListController.getClaimList().changeStatus("Submitted");							
+							}else if (which==2){
+								//option3: email this claim
+								//https://stackoverflow.com/questions/8284706/send-email-via-gmail 2015/01/31
+								ClaimListController.setCurrentClaim(list.get(position));
+								Intent send = new Intent(Intent.ACTION_SENDTO);
+								String uriText = "mailto:" + Uri.encode("") + 
+								          "?subject=" + Uri.encode("Claim") + 
+								          "&body=" + Uri.encode(ClaimListController.getCurrentClaim().email());
+								Uri uri = Uri.parse(uriText);
+								send.setData(uri);
+								startActivity(Intent.createChooser(send, "Send mail..."));
+							}				
+					    }			      
+					});
+					builder.create();  
+					builder.show();
+					// The case status of claim is submitted and you have three options
+				}else if (list.get(position).getStatus().equals("Submitted")){
+					//http://developer.android.com/guide/topics/ui/dialogs.html 2015/01/31				
+					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+					builder.setTitle(R.string.pick_action);
+					builder.setItems(R.array.action_array_sub, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+					    // The 'which' argument contains the index position
+					    // of the selected item
+							if (which==0){
+								//option1: change the status to returned
+								ClaimListController.setCurrentClaim(list.get(position));
+								ClaimListController.getClaimList().changeStatus("Returned");
+														
+							}else if (which==1){
+								//option2: change the status to approved
+								ClaimListController.setCurrentClaim(list.get(position));
+								ClaimListController.getClaimList().changeStatus("Approved");
+														
+							}else if (which==2){
+								//option 3: email this claim
+								//https://stackoverflow.com/questions/8284706/send-email-via-gmail 2015/01/31
+								ClaimListController.setCurrentClaim(list.get(position));
+								Intent send = new Intent(Intent.ACTION_SENDTO);
+								String uriText = "mailto:" + Uri.encode("") + 
+								          "?subject=" + Uri.encode("Claim") + 
+								          "&body=" + Uri.encode(ClaimListController.getCurrentClaim().email());
+								Uri uri = Uri.parse(uriText);
+								send.setData(uri);
+								startActivity(Intent.createChooser(send, "Send mail..."));														
+							}	
+					    }			      
+					});
+					builder.create();  
+					builder.show();
+					// The case status of claim is approved,no other choice but just email these claim
+				} else if (list.get(position).getStatus().equals("Approved")){
+					//https://stackoverflow.com/questions/8284706/send-email-via-gmail 2015/01/31
+					ClaimListController.setCurrentClaim(list.get(position));
+					Intent send = new Intent(Intent.ACTION_SENDTO);
+					String uriText = "mailto:" + Uri.encode("") + 
+					          "?subject=" + Uri.encode("Claim") + 
+					          "&body=" + Uri.encode(ClaimListController.getCurrentClaim().email());
+					Uri uri = Uri.parse(uriText);
+					send.setData(uri);
+					startActivity(Intent.createChooser(send, "Send mail..."));											
+				}
 				return false;
-			}
-			
-		
-		});
-			
+			}	
+		});	
 	}
 
 	@Override
@@ -94,9 +193,20 @@ public class MainActivity extends Activity {
 	}
 	
 	
+	//used for sort adapter,the actual implements are in Claim class compare function
+	public Comparator<? super Claim> sortClaim(){
+		return new Comparator<Claim>() {
+			
+			@Override
+			public int compare(Claim lhs, Claim rhs) {
+				// TODO Auto-generated method stub
+				return lhs.compare(rhs);			
+			}
+		};
+	}
+
 	public void addNewClaim(View v){
 		Intent intent =new Intent(MainActivity.this,AddClaimAcitivity.class);
 		startActivity(intent);
 	}
-
 }

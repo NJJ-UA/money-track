@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AddItemAcitivity" >
+    tools:context=".AddItemAcitivity"
+    tools:ignore="TextFields,HardcodedText" >
 
     <Button
         android:id="@+id/createItemButton"
@@ -115,12 +116,13 @@
         android:text="Unit of Currency"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/createItemCurrencyEditText"
+    <Spinner
+        android:id="@+id/createCurrencySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/createItemButton"
+        android:layout_alignLeft="@+id/createItemCurrencyTextView"
         android:layout_alignRight="@+id/createItemAmountEditText"
-        android:ems="10" />
+        android:layout_below="@+id/createItemCurrencyTextView" />
 
 </RelativeLayout>

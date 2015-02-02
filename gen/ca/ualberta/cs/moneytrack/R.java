@@ -8,6 +8,11 @@
 package ca.ualberta.cs.moneytrack;
 
 public final class R {
+    public static final class array {
+        public static final int action_array=0x7f060001;
+        public static final int action_array_sub=0x7f060002;
+        public static final int currency=0x7f060000;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -24,66 +29,80 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08003b;
-        public static final int addClaimButton=0x7f080000;
-        public static final int addItemButton=0x7f080039;
-        public static final int claimListView=0x7f080001;
-        public static final int createClaimBeginEditText=0x7f080008;
-        public static final int createClaimBeginTextView=0x7f080007;
-        public static final int createClaimButton=0x7f080002;
-        public static final int createClaimEndEditText=0x7f080004;
-        public static final int createClaimEndTextView=0x7f080005;
-        public static final int createClaimNameEditText=0x7f080006;
-        public static final int createClaimNameTextView=0x7f080003;
-        public static final int createItemAmountEditText=0x7f080013;
-        public static final int createItemAmountTextView=0x7f080012;
-        public static final int createItemButton=0x7f080009;
-        public static final int createItemCategoryEditText=0x7f08000f;
-        public static final int createItemCategoryTextView=0x7f08000e;
-        public static final int createItemCurrencyEditText=0x7f080015;
-        public static final int createItemCurrencyTextView=0x7f080014;
-        public static final int createItemDateEditText=0x7f08000d;
-        public static final int createItemDateTextView=0x7f08000c;
-        public static final int createItemDescriptionEditText=0x7f080011;
-        public static final int createItemDescriptionTextView=0x7f080010;
-        public static final int createItemNameEditText=0x7f08000a;
-        public static final int createItemNameTextView=0x7f08000b;
-        public static final int deleteClaimButton=0x7f080038;
-        public static final int deleteItemButton=0x7f08002a;
-        public static final int editClaimBeginEditText=0x7f08001b;
-        public static final int editClaimBeginTextView=0x7f080018;
-        public static final int editClaimButton=0x7f080016;
-        public static final int editClaimEndEditText=0x7f08001c;
-        public static final int editClaimEndTextView=0x7f080019;
-        public static final int editClaimNameEditText=0x7f08001a;
-        public static final int editClaimNameTextView=0x7f080017;
-        public static final int editItemAmountEditText=0x7f080026;
-        public static final int editItemAmountTextView=0x7f080025;
-        public static final int editItemButton=0x7f080037;
-        public static final int editItemCategoryEditText=0x7f080022;
-        public static final int editItemCategoryTextView=0x7f080021;
-        public static final int editItemCurrencyEditText=0x7f080028;
-        public static final int editItemCurrencyTextView=0x7f080027;
-        public static final int editItemDateEditText=0x7f080020;
-        public static final int editItemDateTextView=0x7f08001f;
-        public static final int editItemDescriptionEditText=0x7f080024;
-        public static final int editItemDescriptionTextView=0x7f080023;
-        public static final int editItemNameEditText=0x7f08001e;
-        public static final int editItemNameTextView=0x7f08001d;
-        public static final int finishEditItemButton=0x7f080029;
-        public static final int itemAmountTextView=0x7f080033;
-        public static final int itemAmountVTextView=0x7f080034;
-        public static final int itemCategoryTextView=0x7f08002e;
-        public static final int itemCategoryVTextView=0x7f080030;
-        public static final int itemCurrencyTextView=0x7f080035;
-        public static final int itemCurrencyVTextView=0x7f080036;
-        public static final int itemDateTextView=0x7f08002d;
-        public static final int itemDateVTextView=0x7f08002f;
-        public static final int itemDescriptionTextView=0x7f080031;
-        public static final int itemDescriptionVTextView=0x7f080032;
-        public static final int itemListView=0x7f08003a;
-        public static final int itemNameTextView=0x7f08002b;
-        public static final int itemNameVTextView=0x7f08002c;
+        public static final int action_settings=0x7f090049;
+        public static final int addClaimButton=0x7f090000;
+        public static final int addItemButton=0x7f09003f;
+        public static final int claimListView=0x7f090001;
+        public static final int createClaimBeginEditText=0x7f090006;
+        public static final int createClaimBeginTextView=0x7f090004;
+        public static final int createClaimButton=0x7f090002;
+        public static final int createClaimDescriptionEditText=0x7f09000a;
+        public static final int createClaimDescriptionTextView=0x7f090009;
+        public static final int createClaimEndEditText=0x7f090008;
+        public static final int createClaimEndTextView=0x7f090007;
+        public static final int createClaimNameEditText=0x7f090005;
+        public static final int createClaimNameTextView=0x7f090003;
+        public static final int createCurrencySpinner=0x7f090017;
+        public static final int createItemAmountEditText=0x7f090015;
+        public static final int createItemAmountTextView=0x7f090014;
+        public static final int createItemButton=0x7f09000b;
+        public static final int createItemCategoryEditText=0x7f090011;
+        public static final int createItemCategoryTextView=0x7f090010;
+        public static final int createItemCurrencyTextView=0x7f090016;
+        public static final int createItemDateEditText=0x7f09000f;
+        public static final int createItemDateTextView=0x7f09000e;
+        public static final int createItemDescriptionEditText=0x7f090013;
+        public static final int createItemDescriptionTextView=0x7f090012;
+        public static final int createItemNameEditText=0x7f09000c;
+        public static final int createItemNameTextView=0x7f09000d;
+        public static final int deleteClaimButton=0x7f09003c;
+        public static final int deleteItemButton=0x7f09002e;
+        public static final int descriptTextView=0x7f09003e;
+        public static final int descriptionTextView=0x7f090048;
+        public static final int editClaimBeginEditText=0x7f09001d;
+        public static final int editClaimBeginTextView=0x7f09001b;
+        public static final int editClaimButton=0x7f090018;
+        public static final int editClaimDescriptionEditText=0x7f090020;
+        public static final int editClaimDescriptionTextView=0x7f09001f;
+        public static final int editClaimEndEditText=0x7f09001e;
+        public static final int editClaimEndTextView=0x7f09001a;
+        public static final int editClaimNameEditText=0x7f09001c;
+        public static final int editClaimNameTextView=0x7f090019;
+        public static final int editCurrencySpinner=0x7f09002d;
+        public static final int editItemAmountEditText=0x7f09002a;
+        public static final int editItemAmountTextView=0x7f090029;
+        public static final int editItemButton=0x7f09003b;
+        public static final int editItemCategoryEditText=0x7f090026;
+        public static final int editItemCategoryTextView=0x7f090025;
+        public static final int editItemCurrencyTextView=0x7f09002b;
+        public static final int editItemDateEditText=0x7f090024;
+        public static final int editItemDateTextView=0x7f090023;
+        public static final int editItemDescriptionEditText=0x7f090028;
+        public static final int editItemDescriptionTextView=0x7f090027;
+        public static final int editItemNameEditText=0x7f090022;
+        public static final int editItemNameTextView=0x7f090021;
+        public static final int finishEditItemButton=0x7f09002c;
+        public static final int itemAmountTextView=0x7f090037;
+        public static final int itemAmountVTextView=0x7f090038;
+        public static final int itemCategoryTextView=0x7f090032;
+        public static final int itemCategoryVTextView=0x7f090034;
+        public static final int itemCurrencyTextView=0x7f090039;
+        public static final int itemCurrencyVTextView=0x7f09003a;
+        public static final int itemDateTextView=0x7f090031;
+        public static final int itemDateVTextView=0x7f090033;
+        public static final int itemDescriptionTextView=0x7f090035;
+        public static final int itemDescriptionVTextView=0x7f090036;
+        public static final int itemListView=0x7f09003d;
+        public static final int itemNameTextView=0x7f09002f;
+        public static final int itemNameVTextView=0x7f090030;
+        public static final int unchangeCADTextView=0x7f090043;
+        public static final int unchangeEURTextView=0x7f090041;
+        public static final int unchangeGBPTextView=0x7f090040;
+        public static final int unchangeUSDTextView=0x7f090042;
+        public static final int valueCADTextView=0x7f090044;
+        public static final int valueEURTextView=0x7f090046;
+        public static final int valueGBPTextView=0x7f090047;
+        public static final int valueUSDTextView=0x7f090045;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -95,17 +114,18 @@ public final class R {
         public static final int item_list_activity=0x7f030006;
     }
     public static final class menu {
-        public static final int add_claim_acitivity=0x7f070000;
-        public static final int add_item_acitivity=0x7f070001;
-        public static final int edit_claim=0x7f070002;
-        public static final int item=0x7f070003;
-        public static final int item_detail=0x7f070004;
-        public static final int item_list_acitivity=0x7f070005;
-        public static final int main=0x7f070006;
+        public static final int add_claim_acitivity=0x7f080000;
+        public static final int add_item_acitivity=0x7f080001;
+        public static final int edit_claim=0x7f080002;
+        public static final int item=0x7f080003;
+        public static final int item_detail=0x7f080004;
+        public static final int item_list_acitivity=0x7f080005;
+        public static final int main=0x7f080006;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int pick_action=0x7f050008;
         public static final int title_activity_add_claim_acitivity=0x7f050002;
         public static final int title_activity_add_item_acitivity=0x7f050004;
         public static final int title_activity_edit_claim=0x7f050006;
@@ -135,10 +155,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

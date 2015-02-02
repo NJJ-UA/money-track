@@ -2,84 +2,108 @@ package ca.ualberta.cs.moneytrack;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Claim implements Serializable {
+	/*
+	This is a model class
+	Claim will contain some Items
+	and also have its own attributes.
+	Some explain comment are written before function.
+	You can find the explain of  StatusException in
+	the comment in StatusException.java
+	*/
 	/**
 	 * gerneral serial UID for serial
 	 */
 	private static final long serialVersionUID = 1954300208436592429L;
-	protected String claimName;
-	protected String beginDate;
-	protected String endDate;
-	protected String descript;
-	public ArrayList<Item> itemList;
+	private String claimName;
+	private String beginDate;
+	private String endDate;
+	private String descript;
+	private Item currentItem;
+	private String status="In progress";
+	private ArrayList<Item> itemList;
 	public transient Listener listener;
-	public Item currentItem;
-
 	
 	public Claim(String claimName) {
-		// TODO Auto-generated constructor stub
 		this.claimName=claimName;
 		itemList=new ArrayList<Item>();
 	}
+	
+	public void changeClaimName(String string) throws StatusException {
+		if(status.equals("Submitted") ||status.equals("Approved")){
+			throw new StatusException("Submitted or Approved status not allowed edit or delete!");					
+		}
+		claimName=string;	
+	}
+	
 	public String getClaimName() {
-		// TODO Auto-generated method stub
 		return this.claimName;
 	}
-	public void addBeginDate(String beginDate) {
-		// TODO Auto-generated method stub
-		this.beginDate=beginDate;
-		if (listener!=null){
-			listener.update();
+	
+	public void addBeginDate(String beginDate) throws StatusException {
+		if(status.equals("Submitted") ||status.equals("Approved")){
+			throw new StatusException("Submitted or Approved status not allowed edit or delete!");					
 		}
+		this.beginDate=beginDate;
 	}
+	
 	public String getBeginDate() {
-		// TODO Auto-generated method stub
 		return this.beginDate;
 	}
-	public void addEndDate(String endDate) {
-		// TODO Auto-generated method stub
-		this.endDate=endDate;
-		if (listener!=null){
-			listener.update();
+	
+	public void addEndDate(String endDate) throws StatusException {
+		if(status.equals("Submitted") ||status.equals("Approved")){
+			throw new StatusException("Submitted or Approved status not allowed edit or delete!");					
 		}
+		this.endDate=endDate;
 	}
+	
 	public String getEndDate() {
-		// TODO Auto-generated method stub
 		return this.endDate;
 	}
-	public void addDescript(String descript) {
-		// TODO Auto-generated method stub
+	
+	public void addDescript(String descript) throws StatusException {
+		if(status.equals("Submitted") ||status.equals("Approved")){
+			throw new StatusException("Submitted or Approved status not allowed edit or delete!");					
+		}
 		this.descript=descript;
-		if (listener!=null){
-			listener.update();
+	}
+	
+	public String getDescript() {
+		return descript;
+	}
+	
+	public void addItem(Item item) throws StatusException {
+		if(status.equals("Submitted") ||status.equals("Approved")){
+			throw new StatusException("Submitted or Approved status not allowed edit or delete!");					
 		}
-	}
-	public Object getDescript() {
-		// TODO Auto-generated method stub
-		return this.descript;
-	}
-	public void addItem(Item item) {
-		// TODO Auto-generated method stub
 		itemList.add(item);
-		if (listener!=null){
-			listener.update();
-		}
 	}
-	public void deleteItem(Item item) {
-		// TODO Auto-generated method stub
-		itemList.remove(item);
-		if (listener!=null){
-			listener.update();
+	
+	public void deleteItem(Item item) throws StatusException {
+		if(status.equals("Submitted") ||status.equals("Approved")){
+			throw new StatusException("Submitted or Approved status not allowed edit or delete!");					
 		}
+		itemList.remove(item);	
 	}
 	
 	public String toString(){
-		return claimName+'\n'+'('+beginDate+" to "+endDate+')';
+		return claimName+'\n'+'('+beginDate+" to "+endDate+')'
+				+'\n'+"CAD:"+getCAD()+'\n'+"USD:"+getUSD()+'\n'+"EUR:"+getEUR()+'\n'+"GBP:"+getGBP()+'\n'+status;
 	}
+	
+	//this just return all the information of the claim, including all the information of item
+	public String email(){
+		String email=new String("Claim Name:"+claimName+'\n'+'('+beginDate+" to "+endDate+')'
+				+'\n'+"CAD:"+getCAD()+'\n'+"USD:"+getUSD()+'\n'+"EUR:"+getEUR()+'\n'+"GBP:"+getGBP()+'\n'+status+'\n'+"Description:"+descript+'\n');	
+		for (Item item:itemList){
+			email+=item.email();			
+		}
+		return email;		
+	}
+	
 	public ArrayList<Item> getItemList() {
-		// TODO Auto-generated method stub
 		return itemList;
 	}
 	
@@ -87,23 +111,86 @@ public class Claim implements Serializable {
 		listener=l;
 	}
 	public void changeCurrentItem(Item item) {
-		// TODO Auto-generated method stub
 		currentItem=item;
 	}
 	public Item getCurrentItem() {
-		// TODO Auto-generated method stub
-		return currentItem;
-		
+		return currentItem;	
 	}
-	public void changeClaimName(String string) {
-		// TODO Auto-generated method stub
-		claimName=string;
-		if (listener!=null){
-			listener.update();
+	
+	//just return the total amount of CAD in this whole claim
+	public int getCAD(){
+		int total=0;
+		if (itemList!=null){
+			for (Item item:itemList){
+				if(item.getCurrency().equals("CAD")){
+					total+=item.getAmount();
+				}		
+			}
 		}
+		return total;
+	}
+	
+	//similiar with getCAD
+	public int getUSD(){
+		int total=0;
+		if (itemList!=null){
+			for (Item item:itemList){
+				if(item.getCurrency().equals("USD")){
+					total+=item.getAmount();
+				}		
+			}
+		}
+		return total;
+	}
+	
+	//similiar with getCAD
+	public int getEUR(){
+		int total=0;
+		if (itemList!=null){
+			for (Item item:itemList){
+				if(item.getCurrency().equals("EUR")){
+					total+=item.getAmount();
+				}		
+			}
+		}
+		return total;
+	}
+	
+	//similiar with getCAD
+	public int getGBP(){
+		int total=0;
+		if (itemList!=null){
+			for (Item item:itemList){
+				if(item.getCurrency().equals("GBP")){
+					total+=item.getAmount();
+				}		
+			}
+		}
+		return total;
 	}
 	
 	
-
-
+	public String getStatus(){
+		return status;	
+	}
+	
+	public void changeStatus(String status){
+		this.status=status;	
+	}
+	
+	//compare with another Claim based on the Begin Date,use to sort adapter
+	public int compare(Claim rhs) {
+		String [] l=beginDate.trim().split("-");
+		String [] r=rhs.getBeginDate().trim().split("-");
+		int lh=Integer.valueOf(l[0])*10000+Integer.valueOf(l[1])*100+Integer.valueOf(l[2]);
+		int rh=Integer.valueOf(r[0])*10000+Integer.valueOf(r[1])*100+Integer.valueOf(r[2]);
+		if(lh<rh){
+			return -1;
+		}
+		return 1;
+	}
+	
+	public void update(){
+		listener.update();	
+	}
 }

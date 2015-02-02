@@ -11,9 +11,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 public class ItemListAcitivity extends Activity {
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * 
+	 * function is same as the name, show a list of item
+	 * 
+	  This is a activity class so nothing special :)
+	 * Do almost everything through the ClaimListController
+	 * Some explain comment are written before function.
+	 * 
+	 * 
+	 */
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +68,28 @@ public class ItemListAcitivity extends Activity {
 		getMenuInflater().inflate(R.menu.item_list_acitivity, menu);
 		return true;
 	}
+	
+	public void onResume(){
+		super.onResume();
+		TextView CAD=(TextView) findViewById(R.id.valueCADTextView);
+		TextView USD=(TextView) findViewById(R.id.valueUSDTextView);
+		TextView EUR=(TextView) findViewById(R.id.valueEURTextView);
+		TextView GBP=(TextView) findViewById(R.id.valueGBPTextView);
+		TextView description=(TextView) findViewById(R.id.descriptionTextView);
+		CAD.setText(String.valueOf(ClaimListController.getCurrentClaim().getCAD()));
+		USD.setText(String.valueOf(ClaimListController.getCurrentClaim().getUSD()));
+		EUR.setText(String.valueOf(ClaimListController.getCurrentClaim().getEUR()));
+		GBP.setText(String.valueOf(ClaimListController.getCurrentClaim().getGBP()));
+		description.setText(ClaimListController.getCurrentClaim().getDescript());
+	}
 
 	public void deleteClaim(View view){
-		ClaimListController.deleteClaim();
+		try {
+			ClaimListController.deleteClaim();
+		} catch (StatusException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(this, "Submitted or Approved status not allowed edit or delete!", Toast.LENGTH_LONG).show();
+		}
 		finish();
 	}
 	
